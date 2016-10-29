@@ -2,17 +2,5 @@
   <h2> edit the title </h2>
 
   <hr>
-  <%= form_for @group do |f| %>
-
- biao ti dang
- <hr>
-<%= f.text_field :title %>
-  <br>
-  text for something
-  <br>
-  <%= f.text_area :description %>
-  <br>
-
-  <%= f.submit 'submit', :disable_with => "submitting..." %>
-  <% end %>
+<%= render "form" %>
 </div>
