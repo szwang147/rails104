@@ -17,6 +17,13 @@ resources :posts do
 end
 
 end
+ namespace :account do
+   resources :groups
+   resources :posts
+ end
+
+
+
 root 'groups#index'
 
 
