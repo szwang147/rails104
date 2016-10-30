@@ -1,5 +1,8 @@
+
+
 class GroupsController < ApplicationController
-  before_action :authenticate_user! , only: [:new]
+    before_action :authenticate_user! , only: [:new, :create]
+
   def index
     @groups = Group.all
   end
@@ -14,28 +17,30 @@ class GroupsController < ApplicationController
   end
   def create
     @group = Group.new(group_params)
+    @group.user = current_user
+
     if @group.save
       redirect_to groups_path
     else
-    render :new
+      render :new
+    end
   end
-end
-def update
-  @group = Group.find(params[:id])
-  if @group.update(group_params)
-    redirect_to groups_path, notice: 'ur up boy'
-  else
-    render :edit
+  def update
+    @group = Group.find(params[:id])
+    if @group.update(group_params)
+      redirect_to groups_path, notice: 'ur up boy'
+    else
+      render :edit
+    end
   end
-end
-def destroy
-  @group = Group.find(params[:id])
-  @group.destroy
-  redirect_to groups_path, alert: "ur delete"
-end
-private
+  def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
+    redirect_to groups_path, alert: 'ur destroy boy'
+  end
 
-def group_params
-  params.require(:group).permit(:title, :description)
+  private
+  def group_params
+params.require(:group).permit(:title, :description)
 end
 end
