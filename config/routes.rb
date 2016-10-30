@@ -3,7 +3,19 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 resources :groups do
-resources :posts
+
+member do
+  post :join
+  post :quit
+end
+
+
+resources :posts do
+  collection do
+    get :hot
+  end
+end
+
 end
 root 'groups#index'
 
